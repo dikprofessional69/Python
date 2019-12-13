@@ -1,0 +1,50 @@
+# aplphanumeric check
+def chkalpha(string):
+    s=string
+    ts=s#ts=temp string holder
+    l=len(s)
+    spart=""
+    npart=""
+    sppart=""#special part
+    num=0
+    for i in range(0,l):
+        if((ts[i]>="A" and ts[i]<="Z")or(ts[i]>="a" and ts[i]<="z")):
+            spart=spart+ts[i]
+        elif((ts[i]>="%" and ts[i]<="/")or(ts[i]>=":" and ts[i]<="@")or(ts[i]>="[" and ts[i]<="`")or(ts[i]>="{" and ts[i]<="~")):
+           sppart=sppart+ts[i]
+        elif(ts[i]>="0" and ts[i]<="9"):
+            npart=npart+ts[i]
+        else:
+           True
+    if(npart=="" and sppart==""):
+           print("->Alphabets only")
+           if(s==s.upper()):
+               print("->All upercase")
+           else:
+               print("->all lowercase")
+               
+    elif((spart=="" and sppart=="")):
+            print("->Numbers only")
+            num=int(npart)
+            if(num%2==0):
+                print("->alseo numbers is even")
+            else:
+                print("->number is odd")
+
+    else:
+        print("->Alphanumeric")
+        print(f"->Numpart={npart} Alphabet part={spart} Special characters={sppart}")
+        if(spart==spart.upper()):
+            print("->Alphabet part is All Upper")
+        else:
+            print("->Alphabet part is All lower")
+
+        if(npart!=""):
+            num=int(npart)
+            if(num%2==0):
+                print("->Number part is Even")
+            else:
+                print("->Number part is odd \n")
+while(True):
+    check=input()
+    chkalpha(check)
