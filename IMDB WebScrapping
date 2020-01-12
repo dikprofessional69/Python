@@ -1,0 +1,37 @@
+import pandas as pd
+from requests import get
+from bs4 import BeautifulSoup
+
+
+movienames=list()
+directornames=list()
+ratings=list()
+dates=list()
+page=get('https://www.imdb.com/search/title/?count=100&groups=top_1000&sort=user_rating')
+html = BeautifulSoup(page.content, 'html.parser')
+movies=html.find(class_='article')
+moviediv=movies.find_all(class_='lister-item-content')
+
+    
+l=len(moviediv)
+for i in range(0,l):
+    movienames.append((moviediv[i].find('a')).get_text())
+    director_p=moviediv[i].find_all('p')
+    directornames.append(director_p[2].find('a').get_text())
+    ratingstrong=moviediv[i].find('strong')
+    ratings.append(ratingstrong.get_text())
+    dates.append((moviediv[i].find(class_='lister-item-year text-muted unbold')).get_text())
+
+
+imdbmovies=pd.DataFrame(
+    {
+    'Movie':movienames,
+    'Director':directornames,
+    'Rating':ratings,
+    'Year':dates
+     })
+    
+print(imdbmovies)
+
+imdbmovies.to_csv('imdb100.csv')
+
