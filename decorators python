@@ -1,0 +1,23 @@
+def new(fun):
+    def inner(a,b):
+        if(b==0):
+            print("b cant be zero")
+        else:
+            return fun(a,b)
+    return inner
+    
+
+
+@new
+def f1(a,b):
+    print (a/b)
+
+#this: 
+#new_new=new(f1)
+#new_new(5,0)
+#or above @ line
+
+
+#if @ line added no new to make a new function just can use the above.
+
+f1(5,0)
